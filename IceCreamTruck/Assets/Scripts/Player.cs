@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject Menu;
 
-    private GameObject SpawnedDestroyedVan;
+    public GameObject SpawnedDestroyedVan;
 
     public CameraFollow Camera;
 
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R) && IsAlive)
+        if (Input.GetKeyDown(KeyCode.R) && IsAlive && TimerScript.HasMoved)
         {
             PlayerDeath();
         }
@@ -88,19 +88,18 @@ public class Player : MonoBehaviour
     {
         if (IsAlive)
         {
-            //Camera.Player = SpawnedDestroyedVan;
             Indicator.SetActive(false);
             sr.enabled = false;
             SpawnedDestroyedVan = Instantiate(DestroyedVan, transform.position, transform.rotation) as GameObject;
             Rigidbody2D DestroyedRB = SpawnedDestroyedVan.GetComponent<Rigidbody2D>();
             DestroyedRB.velocity = rb.velocity;
-
+            Camera.Target = SpawnedDestroyedVan.transform;
             Instantiate(Explosion, transform.position, Quaternion.identity);
             MovementScript.enabled = false;
 
 
-            rb.drag = 1f;
-            rb.angularDrag = 0.8f;
+            rb.drag = 3f;
+            rb.angularDrag = 3f;
 
             int x = Random.Range(0, 2);     //Makes spinout 'random' (So it's not the same every time)
             if (x == 0)

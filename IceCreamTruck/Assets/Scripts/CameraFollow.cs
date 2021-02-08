@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
 
-    [SerializeField] private Transform Target;
+    public Transform Target;
 
     [SerializeField] private Vector3 Offset;
 
@@ -16,6 +16,12 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float MaxCameraSize;
 
     [SerializeField] private float Multiplier;
+
+    [Range(0.3f, 0.7f)]
+    [SerializeField] float MinSpeed;
+
+    [Range(0.5f, 0.8f)]
+    [SerializeField] float MaxSpeed;
 
     public GameObject Player;
     private Rigidbody2D PlayerRB;
@@ -40,14 +46,14 @@ public class CameraFollow : MonoBehaviour
             {
                 Camera.orthographicSize -= Multiplier * 1.2f;      //Zoom In
             }
-        } else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) < PlayerScript.MaxSpeed * 0.5)    //Car is slow <or> If vel isn't maxed 
+        } else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) < PlayerScript.MaxSpeed/10 * MinSpeed)    //Car is slow <or> If vel isn't maxed 
         {
             if (Camera.orthographicSize > MinCameraSize)     //If cam is zoomed out
             {
                 Camera.orthographicSize -= Multiplier;      //Zoom In
             }            
         }
-        else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) > PlayerScript.MaxSpeed * 0.8)
+        else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) > PlayerScript.MaxSpeed/10 * MaxSpeed)
         {
             if (Camera.orthographicSize < MaxCameraSize)        //If Cam is zoomed in
             {

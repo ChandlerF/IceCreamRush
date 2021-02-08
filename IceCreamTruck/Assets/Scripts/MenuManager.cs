@@ -13,6 +13,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] GameObject Indicator;
     [SerializeField] ScoreManager Score;
     [SerializeField] TargetManager Target;
+    [SerializeField] CameraFollow CamScript;
 
 
     void Update()
@@ -39,8 +40,9 @@ public class MenuManager : MonoBehaviour
         PlayerScript.rb.drag = 0f;
         PlayerScript.rb.angularDrag = 0.05f;
         PlayerScript.sr.enabled = true;
-        PlayerScript.transform.rotation = Quaternion.identity;
+        Player.transform.rotation = Quaternion.identity;
         PlayerScript.rb.velocity = Vector3.zero;
+        CamScript.Target = Player.transform;
         //SceneManager.LoadScene("Level1");
     }
 
