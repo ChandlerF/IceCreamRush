@@ -11,8 +11,10 @@ public class TargetManager : MonoBehaviour
 
     [SerializeField] private DeathTimer TimerScript;
 
-    [SerializeField] private int OldLocation = 0;
-    [SerializeField] private int NewLocation = 0;
+    private int OldLocation = 0;
+    private int NewLocation = 0;
+
+    [SerializeField] private ScoreManager ScoreManagerScript;
 
     private void Update()
     {
@@ -38,5 +40,6 @@ public class TargetManager : MonoBehaviour
     {
         MoveTarget();
         TimerScript.Timer += ExtraTime;
+        ScoreManagerScript.Score += 1;
     }
 }

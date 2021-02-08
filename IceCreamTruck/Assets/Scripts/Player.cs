@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject ScoreParticles;
 
+    [SerializeField] private CameraShake CamShake;
+
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -84,5 +86,6 @@ public class Player : MonoBehaviour
     {
         Instantiate(ScoreParticles, transform.position, Quaternion.identity);
         TargetManagerObject.GetComponent<TargetManager>().Score();
+        CamShake.Trauma += 0.5f;
     }
 }
