@@ -37,21 +37,22 @@ public class Player : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        Smoke.emissionRate = (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) * 1.4f);
+        //Amount of smoke particles depends on vel
+        Smoke.emissionRate = (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) * 1.4f);  
 
         if(TimerScript.Timer < 0 && IsAlive)
         {
             PlayerDeath();
         }
 
-        /*if(Input.GetAxis("Horizontal") != 0 && Input.GetAxis("Vertical") > 0)
+        if(Input.GetAxis("Vertical") > 0)     //(Input.GetAxis("Horizontal") != 0 && 
         {
             Trails.SetActive(true);
         }
         else
         {
             Trails.SetActive(false);
-        }*/
+        }
     }
 
 

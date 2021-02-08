@@ -10,7 +10,9 @@ public class CameraShake : MonoBehaviour
     [SerializeField] float trauma;
     [SerializeField] float traumaMultiplier = 5f;
     [SerializeField] float traumaMagnitude = 0.8f;
-    [SerializeField] float traumaRotationMagnitude = 17f;
+    //[SerializeField] float traumaRotationMagnitude = 17f;
+    [SerializeField] float traumaDecay = 1.3f;
+
 
     float TimeCounter;
     #endregion
@@ -45,12 +47,19 @@ public class CameraShake : MonoBehaviour
     }
     private void Update()
     {
-        if (CamShakeActive)
+        if (CamShakeActive && Trauma > 0)
         {
             TimeCounter += Time.deltaTime * Mathf.Pow(trauma, 0.3f) * traumaMultiplier;
-            Vector3 NewPos = GetVector3() * traumaMagnitude;
+            Vector3 NewPos = GetVector3() * traumaMagnitude * Trauma;
             transform.localPosition = NewPos;
+            //transform.localRotation = Quaternion.Euler(NewPos * traumaRotationMagnitude);
+            Trauma -= Time.deltaTime * traumaDecay * Trauma;
         }
+        /*else
+        {
+            Vector3 NewPos = Vector3.Lerp(transform.localPosition, Vector3.zero, Time.deltaTime);
+            transform.localPosition = NewPos;
+        }*/
     }
     #endregion
 }
