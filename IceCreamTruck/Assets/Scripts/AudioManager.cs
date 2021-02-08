@@ -33,7 +33,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-       // Play("Theme");
+       //Play("Theme");
     }
     public void Play (string Name)      //use => FindObjectOfType<AudioManager>().Play("AudioName");
     {
@@ -44,5 +44,19 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.Source.Play();
+    }
+
+
+    public void Stop(string Name)      
+    {
+        Sound s = Array.Find(Sounds, Sound => Sound.Name == Name);
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + Name + " not found!");
+            return;
+        }
+        s.Source.Stop();
+
+        //Then use      Stop("Theme");       to stop it
     }
 }
