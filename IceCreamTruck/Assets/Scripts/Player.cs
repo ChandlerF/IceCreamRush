@@ -86,6 +86,6 @@ public class Player : MonoBehaviour
     {
         Instantiate(ScoreParticles, transform.position, Quaternion.identity);
         TargetManagerObject.GetComponent<TargetManager>().Score();
-        CamShake.Trauma += 0.5f;
+        CamShake.Trauma += 0.6f;
     }
 }
