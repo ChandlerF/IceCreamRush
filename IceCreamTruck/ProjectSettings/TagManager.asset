@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Target
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Buildings
+  - Deadly
+  - Target
+  - Player
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Under
+    uniqueID: 1722398961
+    locked: 0
+  - name: TileMap
+    uniqueID: 3709963169
+    locked: 0
+  - name: Important
+    uniqueID: 3761274173
+    locked: 0
+  - name: UI
+    uniqueID: 3993427943
+    locked: 0
