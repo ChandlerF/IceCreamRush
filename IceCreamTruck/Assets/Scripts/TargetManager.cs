@@ -37,6 +37,7 @@ public class TargetManager : MonoBehaviour
     public void Score()
     {
         MoveTarget();
+        FindObjectOfType<AudioManager>().Play("Target");
         TimerScript.Timer += ExtraTime;
         ScoreManagerScript.Score += 1;
     }

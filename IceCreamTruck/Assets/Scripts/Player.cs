@@ -88,6 +88,7 @@ public class Player : MonoBehaviour
     {
         if (IsAlive)
         {
+            FindObjectOfType<AudioManager>().Play("Explosion");
             Indicator.SetActive(false);
             sr.enabled = false;
             SpawnedDestroyedVan = Instantiate(DestroyedVan, transform.position, transform.rotation) as GameObject;
@@ -133,6 +134,7 @@ public class Player : MonoBehaviour
     {
         if (IsAlive)
         {
+            FindObjectOfType<AudioManager>().Play("HitWall");
             CamShake.Trauma += 0.5f;
         }
     }
