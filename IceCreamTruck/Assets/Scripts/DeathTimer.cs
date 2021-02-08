@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class DeathTimer : MonoBehaviour
 {
-    [SerializeField] private float StartTimer;
+    public float StartTimer;
     public float Timer;
 
-    private bool HasMoved = false;
+    public bool HasMoved = false;
 
     private TextMeshProUGUI Text;
     void Start()
@@ -20,7 +20,8 @@ public class DeathTimer : MonoBehaviour
     
     void Update()
     {
-        if(HasMoved == false && Input.GetAxis("Vertical") != 0)
+        Debug.Log(Input.GetAxis("Vertical"));
+        if (HasMoved == false && Input.GetAxis("Vertical") != 0)
         {
             HasMoved = true;
         }

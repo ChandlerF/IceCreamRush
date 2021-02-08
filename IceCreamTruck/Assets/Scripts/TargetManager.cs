@@ -16,14 +16,12 @@ public class TargetManager : MonoBehaviour
 
     [SerializeField] private ScoreManager ScoreManagerScript;
 
-    private void Update()
+    private void Start()
     {
-        if (Input.GetKey(KeyCode.T))
-        {
-            MoveTarget();
-        }
+        MoveTarget();
     }
-    private void MoveTarget()
+
+    public void MoveTarget()
     {
         NewLocation = Random.Range(0, Locations.Count);
 

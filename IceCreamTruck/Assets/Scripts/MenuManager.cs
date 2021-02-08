@@ -5,20 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    [SerializeField] GameObject Player;
+    [SerializeField] Transform SpawnPoint;
+    private Player PlayerScript;
+    [SerializeField] private DeathTimer TimerScript;
+    [SerializeField] GameObject Indicator;
+    [SerializeField] ScoreManager Score;
+    [SerializeField] TargetManager Target;
+
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
-        {
-            Restart();
-        }
-
         if (Input.GetKey(KeyCode.Escape))
         {
             MainMenu();
@@ -26,9 +24,23 @@ public class MenuManager : MonoBehaviour
     }
 
 
-    private void Restart()
+    public void Restart()
     {
-        SceneManager.LoadScene("Level1");
+        TimerScript.HasMoved = false;
+        Target.MoveTarget();
+        Score.Score = 0;
+        TimerScript.Timer = TimerScript.StartTimer;
+        Indicator.SetActive(true);
+        PlayerScript = Player.GetComponent<Player>();
+        Player.transform.position = SpawnPoint.position;
+        Player.GetComponent<PlayerMovement>().enabled = true;
+        PlayerScript.IsAlive = true;
+        PlayerScript.Smoke.gameObject.SetActive(true);
+        PlayerScript.rb.drag = 0f;
+        PlayerScript.rb.angularDrag = 0.05f;
+        PlayerScript.sr.enabled = true;
+        PlayerScript.transform.rotation = Quaternion.identity;
+        //SceneManager.LoadScene("Level1");
     }
 
     private void MainMenu()

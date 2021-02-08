@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    [SerializeField] private ParticleSystem Smoke;
+    public ParticleSystem Smoke;
     [SerializeField] private GameObject Explosion;
     [SerializeField] private DeathTimer TimerScript;
 
@@ -13,20 +13,28 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject Trails;
 
-    private SpriteRenderer sr;
-    [SerializeField] private Sprite DestroyedVan;
+    public SpriteRenderer sr;
+    [SerializeField] private GameObject DestroyedVan;
 
     private PlayerMovement MovementScript;
 
     [SerializeField] private float SpinOut;
 
-    private bool IsAlive = true;
+    public bool IsAlive = true;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
 
     [SerializeField] private GameObject ScoreParticles;
 
     [SerializeField] private CameraShake CamShake;
+
+    [SerializeField] GameObject Menu;
+
+    private GameObject SpawnedDestroyedVan;
+
+    public CameraFollow Camera;
+
+    [SerializeField] GameObject Indicator;
 
     void Start()
     {
@@ -39,15 +47,28 @@ public class Player : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        //Amount of smoke particles depends on vel
-        Smoke.emissionRate = (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) * 1.4f);  
+        if (Input.GetKey(KeyCode.R))
+        {
+            PlayerDeath();
+        }
+
+
+        if (IsAlive)
+        {
+            //Amount of smoke particles depends on vel
+            Smoke.emissionRate = (Mathf.Abs(rb.velocity.x) + Mathf.Abs(rb.velocity.y) * 1.4f);
+        }
+        else
+        {
+            Smoke.gameObject.SetActive(false);
+        }
 
         if(TimerScript.Timer < 0 && IsAlive)
         {
             PlayerDeath();
         }
 
-        if(Input.GetAxis("Vertical") > 0)     //(Input.GetAxis("Horizontal") != 0 && 
+        if(Input.GetAxis("Vertical") > 0 && IsAlive)     //(Input.GetAxis("Horizontal") != 0 && 
         {
             Trails.SetActive(true);
         }
@@ -55,28 +76,42 @@ public class Player : MonoBehaviour
         {
             Trails.SetActive(false);
         }
+
+        if (!IsAlive && SpawnedDestroyedVan.GetComponent<Rigidbody2D>().velocity == Vector2.zero)
+        {
+            Menu.GetComponent<MenuManager>().Restart();
+        }
     }
 
 
     public void PlayerDeath()
     {
-        sr.sprite = DestroyedVan;
+        //Camera.Player = SpawnedDestroyedVan;
+        Indicator.SetActive(false);
+        sr.enabled = false;
+        SpawnedDestroyedVan = Instantiate(DestroyedVan, transform.position, transform.rotation) as GameObject;
+        Rigidbody2D DestroyedRB = SpawnedDestroyedVan.GetComponent<Rigidbody2D>();
+        DestroyedRB.velocity = rb.velocity;
+
         Instantiate(Explosion, transform.position, Quaternion.identity);
         MovementScript.enabled = false;
+
+
+        rb.drag = 1f;
         rb.angularDrag = 0.8f;
 
         int x = Random.Range(0, 2);     //Makes spinout 'random' (So it's not the same every time)
         if (x == 0)
         {
+            DestroyedRB.AddTorque(SpinOut);
             rb.AddTorque(SpinOut);
         }
         else
         {
+            DestroyedRB.AddTorque(-SpinOut);
             rb.AddTorque(-SpinOut);
         }
-
-        rb.drag = 1;
-        Trails.SetActive(false);
+        TimerScript.HasMoved = false;
         IsAlive = false;
     }
 
@@ -84,8 +119,19 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Instantiate(ScoreParticles, transform.position, Quaternion.identity);
-        TargetManagerObject.GetComponent<TargetManager>().Score();
-        CamShake.Trauma += 0.6f;
+        if (IsAlive)
+        {
+            Instantiate(ScoreParticles, transform.position, Quaternion.identity);
+            TargetManagerObject.GetComponent<TargetManager>().Score();
+            CamShake.Trauma += 0.75f;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (IsAlive)
+        {
+            CamShake.Trauma += 0.5f;
+        }
     }
 }

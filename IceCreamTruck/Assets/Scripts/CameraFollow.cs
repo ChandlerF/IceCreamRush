@@ -17,7 +17,7 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private float Multiplier;
 
-    [SerializeField] private GameObject Player;
+    public GameObject Player;
     private Rigidbody2D PlayerRB;
     private PlayerMovement PlayerScript;
 
