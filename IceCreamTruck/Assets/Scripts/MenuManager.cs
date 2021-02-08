@@ -40,11 +40,13 @@ public class MenuManager : MonoBehaviour
         PlayerScript.rb.angularDrag = 0.05f;
         PlayerScript.sr.enabled = true;
         PlayerScript.transform.rotation = Quaternion.identity;
+        PlayerScript.rb.velocity = Vector3.zero;
         //SceneManager.LoadScene("Level1");
     }
 
     private void MainMenu()
     {
-        SceneManager.LoadScene("Menu");
+        Application.Quit();
+        //SceneManager.LoadScene("Menu");
     }
 }

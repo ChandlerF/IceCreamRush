@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
     [System.Obsolete]
     void Update()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && IsAlive)
         {
             PlayerDeath();
         }
@@ -86,33 +86,36 @@ public class Player : MonoBehaviour
 
     public void PlayerDeath()
     {
-        //Camera.Player = SpawnedDestroyedVan;
-        Indicator.SetActive(false);
-        sr.enabled = false;
-        SpawnedDestroyedVan = Instantiate(DestroyedVan, transform.position, transform.rotation) as GameObject;
-        Rigidbody2D DestroyedRB = SpawnedDestroyedVan.GetComponent<Rigidbody2D>();
-        DestroyedRB.velocity = rb.velocity;
-
-        Instantiate(Explosion, transform.position, Quaternion.identity);
-        MovementScript.enabled = false;
-
-
-        rb.drag = 1f;
-        rb.angularDrag = 0.8f;
-
-        int x = Random.Range(0, 2);     //Makes spinout 'random' (So it's not the same every time)
-        if (x == 0)
+        if (IsAlive)
         {
-            DestroyedRB.AddTorque(SpinOut);
-            rb.AddTorque(SpinOut);
+            //Camera.Player = SpawnedDestroyedVan;
+            Indicator.SetActive(false);
+            sr.enabled = false;
+            SpawnedDestroyedVan = Instantiate(DestroyedVan, transform.position, transform.rotation) as GameObject;
+            Rigidbody2D DestroyedRB = SpawnedDestroyedVan.GetComponent<Rigidbody2D>();
+            DestroyedRB.velocity = rb.velocity;
+
+            Instantiate(Explosion, transform.position, Quaternion.identity);
+            MovementScript.enabled = false;
+
+
+            rb.drag = 1f;
+            rb.angularDrag = 0.8f;
+
+            int x = Random.Range(0, 2);     //Makes spinout 'random' (So it's not the same every time)
+            if (x == 0)
+            {
+                DestroyedRB.AddTorque(SpinOut);
+                rb.AddTorque(SpinOut);
+            }
+            else
+            {
+                DestroyedRB.AddTorque(-SpinOut);
+                rb.AddTorque(-SpinOut);
+            }
+            TimerScript.HasMoved = false;
+            IsAlive = false;
         }
-        else
-        {
-            DestroyedRB.AddTorque(-SpinOut);
-            rb.AddTorque(-SpinOut);
-        }
-        TimerScript.HasMoved = false;
-        IsAlive = false;
     }
 
 

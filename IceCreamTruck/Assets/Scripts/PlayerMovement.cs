@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
         x = Input.GetAxis("Horizontal");
 
