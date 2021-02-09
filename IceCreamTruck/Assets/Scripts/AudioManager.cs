@@ -33,7 +33,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-       //Play("Theme");
+       Play("Theme");
+       Play("CarGoing");
     }
     public void Play (string Name)      //use => FindObjectOfType<AudioManager>().Play("AudioName");
     {
