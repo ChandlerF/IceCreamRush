@@ -20,7 +20,6 @@ public class DeathTimer : MonoBehaviour
     
     void Update()
     {
-        Debug.Log(Input.GetAxis("Vertical"));
         if (HasMoved == false && Input.GetAxis("Vertical") != 0)
         {
             HasMoved = true;

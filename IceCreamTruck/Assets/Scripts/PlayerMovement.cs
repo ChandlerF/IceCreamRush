@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private float x;
-    private float y = 1;
+    private float Horizontal;
     
     void Start()
     {
@@ -21,18 +20,18 @@ public class PlayerMovement : MonoBehaviour
     
     void FixedUpdate()
     {
-        x = Input.GetAxis("Horizontal");
+        Horizontal = Input.GetAxis("Horizontal");
 
         if(Input.GetAxis("Vertical") > 0.5f)
         {
             rb.drag = 0;
-            Vector2 Speed = transform.up * (y * Acceleration);
+            Vector2 Speed = transform.up * (1f * Acceleration);
             rb.AddForce(Speed);
         }
         else if(Input.GetAxis("Vertical") < 0)
         {
             rb.drag = 0;
-            Vector2 Speed = transform.up * (y * Acceleration);
+            Vector2 Speed = transform.up * (1f * Acceleration);
             rb.AddForce(-Speed * 0.9f);
         }
         else
@@ -46,11 +45,11 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Direction > 0)
             {
-                rb.rotation -= x * Steering * (rb.velocity.magnitude / MaxSpeed);
+                rb.rotation -= Horizontal * Steering * (rb.velocity.magnitude / MaxSpeed);
             }
             else
             {
-                rb.rotation += x * Steering * (rb.velocity.magnitude / MaxSpeed);
+                rb.rotation += Horizontal * Steering * (rb.velocity.magnitude / MaxSpeed);
             }
         }
 
@@ -65,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = rb.velocity.normalized * MaxSpeed;
         }
 
+        //Debug.Log(RelativeForce);
         Debug.DrawLine(rb.position, rb.GetRelativePoint(RelativeForce), Color.red);       //Shows what the car is rotating around
     }
 }

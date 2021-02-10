@@ -42,6 +42,7 @@ public class MenuManager : MonoBehaviour
         PlayerScript.sr.enabled = true;
         Player.transform.rotation = Quaternion.identity;
         PlayerScript.rb.velocity = Vector3.zero;
+        PlayerScript.rb.angularVelocity = 0f;
         CamScript.Target = Player.transform;
         //SceneManager.LoadScene("Level1");
     }

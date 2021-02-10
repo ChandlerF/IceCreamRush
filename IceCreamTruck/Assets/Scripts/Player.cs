@@ -52,6 +52,11 @@ public class Player : MonoBehaviour
             PlayerDeath();
         }
 
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+            rb.angularVelocity = 0f;
+        //}
+
 
         if (IsAlive)
         {

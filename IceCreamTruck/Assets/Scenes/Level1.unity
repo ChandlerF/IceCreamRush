@@ -134345,7 +134345,7 @@ SpriteRenderer:
   m_SortingLayerID: -533693123
   m_SortingLayer: 3
   m_SortingOrder: 50
-  m_Sprite: {fileID: 21300000, guid: 18d79d9c75f0d1e46a88433454e06d5e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 951fe83c5402e4240b3fd5b622982396, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -134389,7 +134389,7 @@ BoxCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.061463177}
   m_SpriteTilingProperty:
-    border: {x: 0.125, y: 0, z: 0.125, w: 0.125}
+    border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
@@ -136638,7 +136638,7 @@ MonoBehaviour:
     Loop: 0
     Source: {fileID: 0}
   - Name: Target
-    Clip: {fileID: 8300000, guid: 03318ba39e546ff4687d2a4c73d3284d, type: 3}
+    Clip: {fileID: 8300000, guid: 94f492594f9723247ba56a76c71d6a2d, type: 3}
     Volume: 0.5
     Pitch: 1
     Loop: 0
