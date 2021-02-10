@@ -9,6 +9,7 @@ public class DeathTimer : MonoBehaviour
     public float Timer;
 
     public bool HasMoved = false;
+    private bool HasMovedAtLeastOnce = false;
 
     private TextMeshProUGUI Text;
     void Start()
@@ -30,6 +31,12 @@ public class DeathTimer : MonoBehaviour
             Timer -= Time.deltaTime;
         }
         Text.text = Timer.ToString("F0");
+
+        if (!HasMovedAtLeastOnce && HasMoved)
+        {
+            FindObjectOfType<AudioManager>().Play("Soundtrack1");
+            HasMovedAtLeastOnce = true;
+        }
     }
 
     public void ResetTimer()
