@@ -17,6 +17,8 @@ public class CameraFollow : MonoBehaviour
 
     [SerializeField] private float Multiplier;
 
+    public bool CameraZoom = true;
+
     [Range(0.3f, 0.7f)]
     [SerializeField] float MinSpeed;
 
@@ -40,7 +42,7 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 1f)
+        if (Time.timeScale == 1f && CameraZoom)
         {
             if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5)
             {
