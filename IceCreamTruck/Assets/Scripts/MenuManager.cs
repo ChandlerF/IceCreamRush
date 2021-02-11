@@ -16,15 +16,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] CameraFollow CamScript;
 
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            MainMenu();
-        }
-    }
-
-
     public void Restart()
     {
         TimerScript.HasMoved = false;
@@ -45,11 +36,5 @@ public class MenuManager : MonoBehaviour
         PlayerScript.rb.angularVelocity = 0f;
         CamScript.Target = Player.transform;
         //SceneManager.LoadScene("Level1");
-    }
-
-    private void MainMenu()
-    {
-        Application.Quit();
-        //SceneManager.LoadScene("Menu");
     }
 }
