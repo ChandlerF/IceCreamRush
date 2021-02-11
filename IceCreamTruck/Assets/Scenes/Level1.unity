@@ -1147,8 +1147,11 @@ RectTransform:
   - {fileID: 1887383337}
   - {fileID: 460184920}
 <<<<<<< HEAD
+<<<<<<< HEAD
   - {fileID: 1040494052}
   - {fileID: 1698491199}
+=======
+>>>>>>> parent of a32589c (Quit Button)
 =======
 >>>>>>> parent of a32589c (Quit Button)
   m_Father: {fileID: 1167519850}
@@ -130328,6 +130331,7 @@ Transform:
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1040494051
 GameObject:
   m_ObjectHideFlags: 0
@@ -130487,6 +130491,8 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+=======
+>>>>>>> parent of a32589c (Quit Button)
 =======
 >>>>>>> parent of a32589c (Quit Button)
 --- !u!1 &1133323266
