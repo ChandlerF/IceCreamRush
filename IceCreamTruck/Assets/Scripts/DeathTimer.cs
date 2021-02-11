@@ -14,6 +14,11 @@ public class DeathTimer : MonoBehaviour
     [SerializeField] AudioSource Soundtrack1;
     private float StartVolume;
     private bool TimeIsFrozen = false;
+    [SerializeField] Animator Panel;
+    [SerializeField] Animator Restart;
+    [SerializeField] Animator Escape;
+    [SerializeField] Animator Description;
+
 
     private TextMeshProUGUI Text;
     void Start()
@@ -40,6 +45,10 @@ public class DeathTimer : MonoBehaviour
         if (!HasMovedAtLeastOnce && HasMoved)
         {
             Soundtrack1.Play();
+            Panel.Play("PanelFadeOut");
+            Restart.Play("FadeOut");
+            Escape.Play("FadeOut");
+            Description.Play("FadeOut");
             HasMovedAtLeastOnce = true;
         }
 
