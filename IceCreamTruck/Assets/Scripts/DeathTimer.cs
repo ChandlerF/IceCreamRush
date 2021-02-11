@@ -11,9 +11,14 @@ public class DeathTimer : MonoBehaviour
     public bool HasMoved = false;
     private bool HasMovedAtLeastOnce = false;
 
+    [SerializeField] AudioSource Soundtrack1;
+    private float StartVolume;
+    private bool TimeIsFrozen = false;
+
     private TextMeshProUGUI Text;
     void Start()
     {
+        StartVolume = Soundtrack1.volume;
         Text = GetComponent<TextMeshProUGUI>();
         ResetTimer();   
     }
@@ -34,8 +39,19 @@ public class DeathTimer : MonoBehaviour
 
         if (!HasMovedAtLeastOnce && HasMoved)
         {
-            FindObjectOfType<AudioManager>().Play("Soundtrack1");
+            Soundtrack1.Play();
             HasMovedAtLeastOnce = true;
+        }
+
+        if (Time.timeScale == 0f && !TimeIsFrozen)
+        {
+            Soundtrack1.volume *= 0.35f;
+            TimeIsFrozen = true;
+        }
+        else if (Time.timeScale == 1f)
+        {
+            Soundtrack1.volume = StartVolume;
+            TimeIsFrozen = false;
         }
     }
 

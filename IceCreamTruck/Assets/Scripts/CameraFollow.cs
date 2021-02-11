@@ -40,27 +40,31 @@ public class CameraFollow : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5)
+        if (Time.timeScale == 1f)
         {
-            if (Camera.orthographicSize > MinCameraSize)     //If cam is zoomed out
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.5)
             {
-                Camera.orthographicSize -= Multiplier * 1.2f;      //Zoom In
+                if (Camera.orthographicSize > MinCameraSize)     //If cam is zoomed out
+                {
+                    Camera.orthographicSize -= Multiplier * 1.2f;      //Zoom In
+                }
             }
-        } else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) < PlayerScript.MaxSpeed/10 * MinSpeed)    //Car is slow <or> If vel isn't maxed 
-        {
-            if (Camera.orthographicSize > MinCameraSize)     //If cam is zoomed out
+            else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) < PlayerScript.MaxSpeed / 10 * MinSpeed)    //Car is slow <or> If vel isn't maxed 
             {
-                Camera.orthographicSize -= Multiplier;      //Zoom In
-            }            
-        }
-        else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) > PlayerScript.MaxSpeed/10 * MaxSpeed)
-        {
-            if (Camera.orthographicSize < MaxCameraSize)        //If Cam is zoomed in
-            {
-                Camera.orthographicSize += Multiplier * .6f;      //Zoom out
+                if (Camera.orthographicSize > MinCameraSize)     //If cam is zoomed out
+                {
+                    Camera.orthographicSize -= Multiplier;      //Zoom In
+                }
             }
+            else if ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) > PlayerScript.MaxSpeed / 10 * MaxSpeed)
+            {
+                if (Camera.orthographicSize < MaxCameraSize)        //If Cam is zoomed in
+                {
+                    Camera.orthographicSize += Multiplier * .6f;      //Zoom out
+                }
+            }
+            //Camera.orthographicSize = ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) *.9f) + MinCameraSize;
         }
-        //Camera.orthographicSize = ((Mathf.Abs(PlayerRB.velocity.x) + Mathf.Abs(PlayerRB.velocity.y)) *.9f) + MinCameraSize;
     }
 
 
